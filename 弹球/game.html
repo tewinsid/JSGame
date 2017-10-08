@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>萧井陌学习</title>
+    <style media="screen">
+      canvas {
+        border: 1px black solid;
+      }
+    </style>
+    <script src="./js/guagame.js"></script>
+    <script src="./js/thing.js"></script>
+    <script src="./js/util.js"></script>
+  </head>
+  <body>
+    <canvas id="id-canvas" width="400" height="300"></canvas>
+<script>
+//原则 最外层只能有函数不能有变量 函数只能有一个入口
+
+//定义入口
+var __main = function () {
+  //var log = console.log.bind(console)
+  var game = GuaGame(60)
+  var paddle = Paddle()
+  var ball = Ball()
+  var blocks = []
+
+  for (var i = 0; i < 3; i++) {
+    var b = Block()
+    //设置坐标
+    b.x = i* 150
+    b.y = 100
+    blocks.push(b)
+  }
+  game.registerAction('a', function(){
+    paddle.moveLeft()
+  })
+  game.registerAction('d', function(){
+    paddle.moveRight()
+  })
+  game.registerAction('f', function(){
+    ball.fire()
+  })
+  game.update = function() {
+    ball.move()
+    //判断相撞
+    if (paddle.collide(ball)) {
+      ball.rebound()
+    }
+
+    for (var i = 0; i < blocks.length; i++) {
+      var block = blocks[i]
+      //判断ball和墙相撞
+      if (block.collide(ball)) {
+          block.kill()
+          ball.rebound()
+      }
+    }
+
+  }
+  game.draw = function() {
+    game.drawImage(paddle)
+    game.drawImage(ball)
+    for (var i = 0; i < blocks.length; i++) {
+      var block = blocks[i]
+      if (block.alive) {
+        game.drawImage(block)
+      }
+    }
+  }
+}
+__main()
+//把所有的代码放到入口初始化
+</script>
+  </body>
+</html>
