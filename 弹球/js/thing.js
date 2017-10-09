@@ -45,10 +45,10 @@ var Ball = function() {
   }
   o.move = function() {
     if (o.fired) {
-      if (o.x<0 || o.x>400) {
+      if (o.x < 0 || o.x > 400 - o.img.width) {
         o.speedX *= -1
       }
-      if (o.y<0 || o.y>300) {
+      if (o.y < 0 || o.y > 300 - o.img.height) {
         o.speedY *= -1
       }
       //move
@@ -61,19 +61,25 @@ var Ball = function() {
   }
   return o
 }
-//wall
-var Block = function() {
+//block
+var Block = function(position) {
+  // position is [0,0] 格式
+  var p = position
   var image = imageFromePath('./img/wall.png')
   var o = {
     img: image,
-    x: 100,
-    y: 100,
+    x: p[0],
+    y: p[1],
     w: 25,
     h: 25,
     alive: true,
+    lifes: p[2] || 1,
   }
   o.kill = function() {
-    o.alive = false
+    o.lifes--
+    if (o.lifes == '0') {
+      o.alive = false
+    }
   }
   o.collide = function(ball) {
     //判断两个矩形是否相交
