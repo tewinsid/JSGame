@@ -20,19 +20,19 @@ var rectIntersects = function(a,ball) {
   return false
 }
 
-var loadLevel = function(n) {
+var loadLevel = function(game,n) {
   n = n-1
   var level = levels[n]
   var blocks = []
   for (var i = 0; i < level.length; i++) {
     var p = level[i]
-    var b = Block(p)
+    var b = Block(game, p)
     blocks.push(b)
   }
   return blocks
 }
 //debug
-var enableDebugMode = function(enable) {
+var enableDebugMode = function(game, enable) {
   if (!enable) {
     return
   }
@@ -43,7 +43,7 @@ var enableDebugMode = function(enable) {
       paused = !paused
     } else if ('1234567'.includes(k)) {
       //调关
-      blocks = loadLevel(Number(k))
+      blocks = loadLevel(game, Number(k))
     }
   })
   //控制速度
@@ -53,3 +53,4 @@ var enableDebugMode = function(enable) {
     window.fps = Number(input.value)
   })
 }
+//
