@@ -75,6 +75,7 @@ var GuaGame = function(fps, images, runcallback) {
     for (var i = 0; i < actions.length; i++) {
       var key = actions[i]
       if (g.keydowns[key]) {
+        //如果按键被按下，调用注册的action
         g.actions[key]()
       }
     }
