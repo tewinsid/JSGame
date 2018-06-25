@@ -11,7 +11,7 @@ var __main = function (){
 
 
   //var log = console.log.bind(console)
-  var game = GuaGame(60, images,function(g) {
+  var game = new GuaGame(60, images, function(g) {
     var scene = SceneTitle.newInstance(g)
     log(scene + "初始化成功")
     g.runWithScene(scene)

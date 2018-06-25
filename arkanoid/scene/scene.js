@@ -47,6 +47,7 @@ class Scene extends GuaScene{
       enableDrag = false
     })
   }
+  
   draw(){
     var game = this.game
     game.context.fillStyle = '#000'
@@ -61,7 +62,6 @@ class Scene extends GuaScene{
     }
     game.context.fillText('分数:' + this.score, 10, 290);
   }
-
 
   update() {
     var game = this.game
