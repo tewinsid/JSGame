@@ -9,6 +9,9 @@ class Scene extends GuaScene{
     this.score = 0
     this.paused = false
     this.enableDrag = false // 拖拽flag
+    var game = this.game
+    var paddle = this.paddle
+    var ball = this.ball
     game.registerAction('a', function(){
       paddle.moveLeft()
     })
@@ -45,26 +48,33 @@ class Scene extends GuaScene{
     })
   }
   draw(){
+    var game = this.game
     game.context.fillStyle = '#000'
     game.context.fillRect(0,0,400,300)
-    game.drawImage(paddle)
-    game.drawImage(ball)
-    for (var i = 0; i < blocks.length; i++) {
-      var block = blocks[i]
+    game.drawImage(this.paddle)
+    game.drawImage(this.ball)
+    for (var i = 0; i < this.blocks.length; i++) {
+      var block = this.blocks[i]
       if (block.alive) {
         game.drawImage(block)
       }
     }
-    game.context.fillText('分数:' + score, 10, 290);
+    game.context.fillText('分数:' + this.score, 10, 290);
   }
 
 
   update() {
+    var game = this.game
+    var ball = this.ball
+    var paddle = this.paddle
+    var blocks = this.blocks
+    var score = this.score
     if (this.paused) {
       return
     }
     //判读死亡 游戏结束
-    if (thsball.y > paddle.y) {
+    log(ball)
+    if (ball.y > paddle.y) {
       var end = new SceneEnd(game)
       game.replaceScene(end)
     }
@@ -84,9 +94,5 @@ class Scene extends GuaScene{
           score += 100
       }
     }
-  }
-  static new(game) {
-    var i = new this(game)
-    return i
   }
 }
