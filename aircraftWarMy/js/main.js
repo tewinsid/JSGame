@@ -6,5 +6,5 @@ var __main = funciton () {
     '/img/enemy1.png',
     '/img/hero.png',
   ]
-  var game = GuaGame()
+  var game = GuaGame(images)
 }

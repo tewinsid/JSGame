@@ -1,8 +1,31 @@
 <!DOCTYPE html>
-
+<html>
 <head>
 <title>AircraftWarMy</title>
+<style media="screen">
+  #canvas {
+    border: 1px black solid;
+  }
+</style>
 </head>
+
 <body>
-<canvas id="canvas"/>
+<canvas id="canvas" width="400" height="300"></canvas>
 </body>
+<script>
+  var context = document.getElementById('canvas').getContext('2d');
+
+  var img = new Image();
+  img.onload = function () {
+    context.drawImage(img, 0, 0);
+  }
+  img.src = './img/hero.png';
+  window.addEventListener('keydown', function (event) {
+    if (event.key = 'a') {
+      context.clearRect(0,0,canvas.width,canvas.height);
+      context.console.dir(img, 10,10);
+    }
+    console.log(event)
+  })
+</script>
+</html>

@@ -4,9 +4,10 @@
 
 var __main = function (){
   var images = {
-    ball: './img/ball.jpg',
-    paddle: './img/board.jpg',
-    block: './img/wall.png',
+    hero: './img/hero.jpg',
+    bullet: './img/bullet.jpg',
+    backgroud: './img/backgroud_gray.png',
+    enemy: './img/enemy1.png',
   }
 
 
