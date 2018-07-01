@@ -55,15 +55,11 @@
 var log = function (msg) {
   console.log(msg);
 }
-
-var leftDown = false;
-var rightDown = false;
-var upDown = false;
-var down = false;
 var GuaGame = function() {
   var g = {
     actions: {},
     keydowns: {},
+    pause: false,
   };
   g.canvas = document.getElementById('canvas')
   g.context = g.canvas.getContext('2d');
@@ -77,14 +73,15 @@ var GuaGame = function() {
   g.registerAction = function(key, callback) {
     g.actions[key] = callback;
   }
+
+
   //timer
   setInterval(function() {
-    //update
-    g.update();
-    //clear
-    g.context.clearRect(0,0,canvas.width,canvas.height);
-    //draw
-    g.draw();
+    if(!g.pause) {
+      g.update();
+      g.context.clearRect(0,0,canvas.width,canvas.height);
+      g.draw();
+    }
   }, 1000/30);
   return g;
 }
@@ -99,8 +96,9 @@ var Hero = function(game) {
     image: image,
     x: 100,
     y: 300,
-    speed: 5,
+    speed: 5
   }
+  // o.game = game;
   image.onload = function() {
     o.width = o.image.width;
     o.height = o.image.height;
@@ -127,12 +125,72 @@ var Hero = function(game) {
   }
   return o;
 }
+var Bullet = function(hero) {
+  var image = imageFromPaht('./img/bullet.png');
+  var o = {
+    image: image,
+  }
+  image.onload = function(){
+    o.width = o.image.width;
+    o.height = o.image.height;
+    o.x = hero.x + ((hero.width - o.width) / 2);
+    o.y = hero.y - 25;
+  }
+  return o;
+}
 var __main = function() {
   var game = GuaGame();
   var background = new Image();
   //怎样处理onload
   background.src = './img/background_gray.png';
   var hero = Hero(game);
+  var bullets = [];
+  //
+  registerAllAction(game, hero);
+  //变相实现注册 就是在对象外面更改对象方法
+  setInterval(function() {
+    var bullet = Bullet(hero);
+    bullets[bullets.length] = bullet;
+  }, 1000/5);
+  window.addEventListener('keydown', function(event) {
+    if(event.key == 'p') {
+      game.pause = !game.pause;
+    }
+  })
+  game.update = function() {
+    // update(hero);
+    var actions = Object.keys(game.actions);
+    for (var i = 0; i < actions.length; i++) {
+      var key = actions[i];
+      if (game.keydowns[key]) {
+        game.actions[key]();
+      }
+    }
+    for (var i = 0; i < bullets.length; i++) {
+      var bulletTemp = bullets[i];
+      bulletTemp.y -= 5;
+      if(bulletTemp.y <= 0) {
+        deleteBullet(i , bullets);
+      }
+    }
+  }
+  game.draw = function() {
+    game.context.drawImage(background, 0, 0);
+    game.context.drawImage(hero.image, hero.x, hero.y);
+    for (var i = 0; i < bullets.length; i++) {
+      var bulletTemp = bullets[i];
+      game.context.drawImage(bulletTemp.image, bulletTemp.x, bulletTemp.y)
+    }
+  }
+
+}
+var deleteBullet = function(index, bullets) {
+  for(var i=index; i < bullets.length; i++) {
+    bullets[i] = bullets[i+1];
+  }
+  bullets.length--;
+}
+var registerAllAction = function(game, hero) {
   game.registerAction('a', function() {
     hero.moveLeft();
   });
@@ -145,21 +203,5 @@ var __main = function() {
   game.registerAction('s', function() {
     hero.moveDown();
   });
-  //变相实现注册 就是在对象外面更改对象方法
-  game.update = function() {
-    // update(hero);
-    var actions = Object.keys(game.actions);
-    for (var i = 0; i < actions.length; i++) {
-      var key = actions[i];
-      if (game.keydowns[key]) {
-        game.actions[key]();
-      }
-    }
-  }
-  game.draw = function() {
-    game.context.drawImage(background, 0, 0);
-    game.context.drawImage(hero.image, hero.x, hero.y);
-  }
-
 }
 __main();

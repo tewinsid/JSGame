@@ -1,0 +1,22 @@
+git
+查看提交
+git log --pretty=oneline
+回退
+git reset --hard HEAD^
+git reset --hard 版本号前几位5
+history
+git reflog
+git add 吧文件添加到暂存区（stage)
+git commit 把文件添加到分支
+git status 查看状态
+git checkout -- readme.txt 回滚单个文件
+git rm fileName  删除文件
+git push -u origin master
+git checkout -b dev 创建dev分支并切换
+  = git branch dev
+    git checkout dev
+git branch 查看当前分支
+git checkout 分支名 切换分支
+git merge 分支名 合并目标分支到当前分支
+git branch -d 分支名 删除分支
+git log --graph 可以看到分支合并图
