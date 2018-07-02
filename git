@@ -20,3 +20,6 @@ git checkout 分支名 切换分支
 git merge 分支名 合并目标分支到当前分支
 git branch -d 分支名 删除分支
 git log --graph 可以看到分支合并图
+强行合并本地
+git fetch all 拉取远程
+git reset --hard origin/master
