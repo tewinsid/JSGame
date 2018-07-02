@@ -6,7 +6,7 @@ var GuaGame = function() {
     actions: {},
     keydowns: {},
     pause: false,
-    bullets: [],
+    debug: true,
   };
   g.canvas = document.getElementById('canvas')
   g.context = g.canvas.getContext('2d');
@@ -43,7 +43,9 @@ var Hero = function(game) {
     image: image,
     x: 100,
     y: 300,
-    speed: 5
+    speed: 5,
+    bullets: [],
+    bulletSpeed: 5,
   }
   // o.game = game;
   image.onload = function() {
@@ -76,6 +78,7 @@ var Bullet = function(hero) {
   var image = imageFromPaht('./img/bullet.png');
   var o = {
     image: image,
+    speed: 5,
   }
   image.onload = function() {
     o.width = o.image.width;
@@ -84,7 +87,7 @@ var Bullet = function(hero) {
     o.y = hero.y - 25;
   }
   o.move = function() {
-    o.y -= 5;
+    o.y -= hero.bulletSpeed;
   }
   return o;
 }
@@ -99,17 +102,14 @@ var __main = function() {
   var game = GuaGame();
   var background = Background();
   var hero = Hero(game);
-  var bullets = game.bullets;
+  var bullets = hero.bullets;
+  game.hero = hero;
+  enableDebug(game);
   registerAllAction(game, hero);
   setInterval(function() {
     var bullet = Bullet(hero);
     bullets[bullets.length] = bullet;
   }, 1000 / 5);
-  window.addEventListener('keydown', function(event) {
-    if (event.key == 'p') {
-      game.pause = !game.pause;
-    }
-  })
   game.update = function() {
     // update(hero);
     var actions = Object.keys(game.actions);
@@ -155,5 +155,20 @@ var registerAllAction = function(game, hero) {
   game.registerAction('s', function() {
     hero.moveDown();
   });
+}
+var enableDebug = function(game) {
+  if(game.debug = false) {
+    return;
+  }
+  hero = game.hero;
+  //暂停
+  window.addEventListener('keydown', function(event) {
+    if (event.key == 'p') {
+      game.pause = !game.pause;
+    }
+  })
+  document.getElementById('slide').addEventListener('change', function(event) {
+    hero.bulletSpeed = event.target.value;
+  })
 }
 __main();
