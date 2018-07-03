@@ -43,7 +43,7 @@ var enableDebugMode = function(game, enable) {
       paused = !paused
     } else if ('1234567'.includes(k)) {
       //调关
-      blocks = loadLevel(game, Number(k))
+      // blocks = loadLevel(game, Number(k))
     }
   })
   //控制速度
