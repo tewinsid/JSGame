@@ -2,66 +2,83 @@ class Scene extends GuaScene{
 // var Scene = function(game) {
   constructor(game){
     super(game)
+    this.setUp()
+  }
+
+  setUp() {
     //初始化
-    this.backgroud = GuaImage.new(game, 'background');
+    game = this.game
+    this.background = GuaImage.new(game, 'background');
     this.hero = GuaImage.new(game, 'hero')
+
+    this.hero.x = 100
+    this.hero.y = 200
     // this.blocks = loadLevel(game, 1)
     this.score = 0
     this.paused = false
     this.enableDrag = false // 拖拽flag
     var game = this.game
-    var backgroud = this.background
+    var background = this.background
     var hero = this.hero
-    game.registerAction('a', function(){
-      paddle.moveLeft()
-    })
-    game.registerAction('d', function(){
-      paddle.moveRight()
-    })
-    game.registerAction('f', function(){
-      ball.fire()
-    })
-    game.canvas.addEventListener('mousedown', function(event) {
-      var x = event.offsetX
-      var y = event.offsetY
-      log(x, y,event)
-      if (ball.hasPoint(x, y)) {
-        //设置拖拽状态
-        enableDrag = true
-      }
-    })
-    game.canvas.addEventListener('mousemove', function(event) {
-      var x = event.offsetX
-      var y = event.offsetY
-
-      if (enableDrag) {
-        log(x, y,'drag')
-        ball.x = x
-        ball.y = y
-      }
-    })
-    game.canvas.addEventListener('mouseup', function(event) {
-      var x = event.offsetX
-      var y = event.offsetY
-      log(x, y,'up')
-      enableDrag = false
-    })
-  }
-
-  draw(){
-    var game = this.game
-    game.context.fillStyle = '#000'
-    game.context.fillRect(0,0,400,300)
-    game.drawImage(this.backgroud)
-    game.drawImage(this.hero)
-    // for (var i = 0; i < this.blocks.length; i++) {
-    //   var block = this.blocks[i]
-    //   if (block.alive) {
-    //     game.drawImage(block)
+    // game.registerAction('a', function(){
+    //   hero.moveLeft()
+    // })
+    // game.registerAction('d', function(){
+    //   hero.moveRight()
+    // })
+    // game.registerAction('w', function(){
+    //   hero.moveUp()
+    // })
+    // game.registerAction('s', function(){
+    //   hero.moveDown()
+    // })
+    // game.registerAction('f', function(){
+    //   ball.fire()
+    // })
+    // game.canvas.addEventListener('mousedown', function(event) {
+    //   var x = event.offsetX
+    //   var y = event.offsetY
+    //   log(x, y,event)
+    //   if (ball.hasPoint(x, y)) {
+    //     //设置拖拽状态
+    //     enableDrag = true
     //   }
-    // }
-    game.context.fillText('分数:' + this.score, 10, 290);
+    // })
+    // game.canvas.addEventListener('mousemove', function(event) {
+    //   var x = event.offsetX
+    //   var y = event.offsetY
+    //
+    //   if (enableDrag) {
+    //     log(x, y,'drag')
+    //     ball.x = x
+    //     ball.y = y
+    //   }
+    // })
+    // game.canvas.addEventListener('mouseup', function(event) {
+    //   var x = event.offsetX
+    //   var y = event.offsetY
+    //   log(x, y,'up')
+    //   enableDrag = false
+    // })
+
+    this.addElements(this.background)
+    this.addElements(this.hero)
   }
+
+
+
+  // draw(){
+  //   var game = this.game
+  //   // game.context.fillStyle = '#000'
+  //   // game.context.fillRect(0,0,400,300)
+  //   // for (var i = 0; i < this.blocks.length; i++) {
+  //   //   var block = this.blocks[i]
+  //   //   if (block.alive) {
+  //   //     game.drawImage(block)
+  //   //   }
+  //   // }
+  //   game.context.fillText('分数:' + this.score, 10, 290);
+  // }
 
   update() {
     var game = this.game
