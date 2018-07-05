@@ -9,8 +9,14 @@ class GuaScene {
       this.game.drawImage(this.elements[i]);
     }
   }
-  addElements(element) {
+  addElement(element) {
+    //去掉耦合在父类中吧场景注册到img中
+    element.scene = this
     this.elements.push(element)
   }
-  update(){}
+  update(){
+    for(var i=0; i < this.elements.length; i++) {
+      this.elements[i].update()
+    }
+  }
 }

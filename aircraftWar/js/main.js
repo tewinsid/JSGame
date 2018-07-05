@@ -7,7 +7,9 @@ var __main = function (){
     hero: './img/hero.png',
     bullet: './img/bullet.png',
     background: './img/background_gray.png',
-    enemy: './img/enemy1.png',
+    enemy1: './img/enemy1.png',
+    enemy0: './img/enemy0.png',
+    enemy2: './img/enemy2.png',
   }
 
 
