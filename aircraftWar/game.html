@@ -24,10 +24,40 @@
   </head>
   <body>
     <canvas id="id-canvas" width="400" height="600"></canvas>
-    <input id="id-input-speed" type="range" value="0"/>
+    <input id="id-input-speed" type="range" value="0" style="float:left"/>
+    <div class="">
+      <label>
+        <input class="gua-auto-slider" type="range"
+        style="float:left"
+        data-value="config.hero_speed"></input>
+        英雄速度 <span class="gua-label"></span>
+      </label>
+    </div>
     <!-- <div>
       <textarea id="id-text-log" rows="14" cols="46"></textarea>
     </div> -->
     <script src="./js/main.js"></script>
+    <script>
+      var es = sel => document.querySelectorAll(sel)
+      var bindAll = function(sel, eventName, callback) {
+        var l = es(sel)
+        for (var i = 0; i < l.length; i++) {
+          var input = l[i]
+          input.addEventListener(eventName, function(event) {
+            callback(event)
+          })
+        }
+      }
+      bindAll('.gua-auto-slider', 'input', function(event){
+        log(event.target)
+        var target = event.target
+        var bindVar = target.dataset.value
+        var value = target.value
+        // config.hero_speed = value
+        eval(bindVar + "=" + value)
+        var label = target.closest('label').querySelector('.gua-label')
+        label.innerText = value
+      })
+    </script>
   </body>
 </html>

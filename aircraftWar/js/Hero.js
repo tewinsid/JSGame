@@ -21,7 +21,8 @@ class Hero extends GuaImage {
   }
 
   update() {
-    log(this.coolDown)
+    log(this.speed)
+    this.speed = config.hero_speed
     super.update()
     if (this.coolDown > 0) {
       this.coolDown--

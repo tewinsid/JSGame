@@ -53,4 +53,8 @@ var enableDebugMode = function(game, enable) {
     window.fps = Number(input.value)
   })
 }
+
+var config = {
+  hero_speed: 10,
+}
 //
