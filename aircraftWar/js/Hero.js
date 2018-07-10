@@ -17,11 +17,10 @@ class Hero extends GuaImage {
   }
 
   resetCoolDown() {
-    this.coolDown = 15
+    this.coolDown = config.coolDown
   }
 
   update() {
-    log(this.speed)
     this.speed = config.hero_speed
     super.update()
     if (this.coolDown > 0) {
@@ -38,26 +37,27 @@ class Hero extends GuaImage {
   }
 
   moveLeft() {
-    if(this.x >=0 ) {
-      this.x -= this.speed
+    if(this.x >= 0) {
+      this.x -= parseInt(this.speed)
     }
   }
 
   moveRight() {
+    log(this.speed)
     if(this.x <= this.game.canvas.width - this.w ) {
-      this.x += this.speed
+      this.x += parseInt(this.speed)
     }
   }
 
   moveUp() {
     if(this.y >= 10 ) {
-      this.y -= this.speed
+      this.y -= parseInt(this.speed)
     }
   }
 
   moveDown() {
     if(this.y <= this.game.canvas.height - this.h ) {
-      this.y += this.speed
+      this.y += parseInt(this.speed)
     }
   }
 }

@@ -47,9 +47,9 @@ class Scene extends GuaScene{
     game.registerAction('s', function(){
       hero.moveDown()
     })
-    game.registerAction('f', function(){
-      hero.fire()
-    })
+    // game.registerAction('f', function(){
+    //   ball.fire()
+    // })
     // game.canvas.addEventListener('mousedown', function(event) {
     //   var x = event.offsetX
     //   var y = event.offsetY

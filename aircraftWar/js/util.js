@@ -56,5 +56,6 @@ var enableDebugMode = function(game, enable) {
 
 var config = {
   hero_speed: 10,
+  coolDown: 10,
 }
 //

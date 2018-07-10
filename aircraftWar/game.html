@@ -33,6 +33,14 @@
         英雄速度 <span class="gua-label"></span>
       </label>
     </div>
+    <div class="">
+      <label>
+        <input class="gua-coolDown-slider" type="range"
+        style="float:left"
+        data-value="config.coolDown"></input>
+        冷却时间 <span class="gua-coolDown"></span>
+      </label>
+    </div>
     <!-- <div>
       <textarea id="id-text-log" rows="14" cols="46"></textarea>
     </div> -->
@@ -49,13 +57,21 @@
         }
       }
       bindAll('.gua-auto-slider', 'input', function(event){
-        log(event.target)
         var target = event.target
         var bindVar = target.dataset.value
         var value = target.value
+        //这样赋值后hero.speed的值变为了字符串类型
         // config.hero_speed = value
         eval(bindVar + "=" + value)
         var label = target.closest('label').querySelector('.gua-label')
+        label.innerText = value
+      })
+      bindAll('.gua-coolDown-slider', 'input', function(event){
+        var target = event.target
+        var bindVar = target.dataset.value
+        var value = target.value
+        eval(bindVar + "=" + value)
+        var label = target.closest('label').querySelector('.gua-coolDown')
         label.innerText = value
       })
     </script>
