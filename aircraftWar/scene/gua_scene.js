@@ -5,8 +5,8 @@ class GuaScene {
   }
   draw() {
     // log(this.elements)
-    for(var i=0; i < this.elements.length; i++) {
-      this.game.drawImage(this.elements[i]);
+    for (var e of this.elements) {
+      e.draw()
     }
   }
   addElement(element) {
@@ -15,13 +15,13 @@ class GuaScene {
     this.elements.push(element)
   }
   update(){
-    if(config.hero_speed == 75) {
-      for(var i=0; i < this.elements.length; i++) {
-        log(this.elements[i])
-      }
-    }
     for(var i=0; i < this.elements.length; i++) {
       this.elements[i].update()
     }
+  }
+
+  static new (game) {
+    var i = new this(game)
+    return i
   }
 }

@@ -10,12 +10,13 @@ var __main = function (){
     enemy1: './img/enemy1.png',
     enemy0: './img/enemy0.png',
     enemy2: './img/enemy2.png',
+    spark: './img/spark.png',
   }
 
 
   //var log = console.log.bind(console)
   var game = new GuaGame(60, images,function(g) {
-    var scene = new Scene(g)
+    var scene = new SceneTitle(g)
     log(scene + "初始化成功")
     g.runWithScene(scene)
   })

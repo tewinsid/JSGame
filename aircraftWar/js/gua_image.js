@@ -8,7 +8,12 @@ class GuaImage {
     this.y = 0
   }
 
+  draw() {
+    this.game.drawImage(this)
+  }
+
   update() {}
+  
   static new (game, name){
     var i = new this(game, name)
     return i

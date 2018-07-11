@@ -23,7 +23,3 @@ class Enemy extends GuaImage {
     this.y += this.speed
   }
 }
-const randomBetween = function(start, end) {
-  var temp = Math.random() * (end - start + 1)
-  return Math.floor(temp) + start
-}

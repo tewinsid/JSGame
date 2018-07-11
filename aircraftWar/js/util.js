@@ -59,3 +59,7 @@ var config = {
   coolDown: 10,
 }
 //
+const randomBetween = function(start, end) {
+  var temp = Math.random() * (end - start + 1)
+  return Math.floor(temp) + start
+}
